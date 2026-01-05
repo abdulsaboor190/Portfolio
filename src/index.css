@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --mono-black: #0a0a0a;
+  --mono-dark: #1a1a1a;
+  --mono-medium: #525252;
+  --mono-gray: #737373;
+  --mono-light: #a3a3a3;
+  --mono-offwhite: #e5e5e5;
+  --mono-white: #ffffff;
+}
+
+@layer base {
+  * {
+    @apply border-gray-800/20;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-black via-gray-950 to-slate-950 text-white antialiased;
+    font-family: 'Inter', 'Helvetica Neue', 'SF Pro Display', system-ui, sans-serif;
+    overflow-x: hidden;
+    background-color: var(--mono-black);
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  
+  /* Hide default cursor on desktop when custom cursor is active */
+  @media (min-width: 1024px) {
+    body.custom-cursor-active {
+      cursor: none;
+    }
+  }
+}
+
+@layer utilities {
+  .text-gradient-mono {
+    @apply bg-gradient-to-r from-gray-300 via-white to-gray-300 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-subtle {
+    @apply bg-gradient-to-r from-gray-400 via-gray-200 to-gray-400 bg-clip-text text-transparent;
+  }
+  
+  .glass-mono {
+    @apply bg-white/10 backdrop-blur-xl border border-white/15 rounded-3xl;
+  }
+  
+  .section-padding {
+    @apply py-32 px-4 sm:px-6 lg:px-8;
+  }
+  
+  .blob-gradient-1 {
+    background: linear-gradient(135deg, rgba(82, 82, 82, 0.4), rgba(163, 163, 163, 0.4));
+  }
+  
+  .blob-gradient-2 {
+    background: linear-gradient(135deg, rgba(163, 163, 163, 0.4), rgba(115, 115, 115, 0.4));
+  }
+  
+  .blob-gradient-3 {
+    background: linear-gradient(135deg, rgba(82, 82, 82, 0.3), rgba(115, 115, 115, 0.3));
+  }
+}
+
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Smooth page transitions */
+.page-transition {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Noise texture overlay */
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
